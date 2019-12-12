@@ -11,10 +11,10 @@
 # These are the routes defining the default behaviour of Bolt's frontend.
 # Changing these might give unexpected results or even break your website. If
 # possible, only add NEW routes above or below these.
-frontend:
-  resource: '../vendor/bolt/core/src/Controller/Frontend/'
-  prefix: /
-  type: annotation
+#frontend:
+#  resource: '../vendor/bolt/core/src/Controller/Frontend/'
+#  prefix: /
+#  type: annotation
 
 # ------------------------------------------------------------------------------
 # Place your own routes here, that have a LOWER priority than the default routes.

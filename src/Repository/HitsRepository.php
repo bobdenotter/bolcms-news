@@ -19,6 +19,16 @@ class HitsRepository extends ServiceEntityRepository
         parent::__construct($registry, Hits::class);
     }
 
+    public function findOneForToday(): ?Hits
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.createdAt LIKE :val')
+            ->setParameter('val', date('Y-m-d*'))
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
     // /**
     //  * @return Hits[] Returns an array of Hits objects
     //  */

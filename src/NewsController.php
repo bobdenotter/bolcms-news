@@ -40,7 +40,7 @@ class NewsController extends TwigAwareController
 
     private function addHit(Request $request): void
     {
-        $options = @unserialize(base64_decode($request->get('hash'), true));
+        $options = @unserialize(base64_decode($request->get('hash'), false));
 
         if (! $options || $this->hitsRepository->findOneForToday()) {
             return;

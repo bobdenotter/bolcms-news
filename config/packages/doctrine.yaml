@@ -35,12 +35,6 @@ doctrine:
                 dir: '%kernel.project_dir%/vendor/bolt/core/src/Entity'
                 prefix: 'Bolt\Entity'
                 alias: Bolt
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
             gedmo_translatable:
                 type: annotation
                 prefix: Gedmo\Translatable\Entity

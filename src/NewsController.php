@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App;
 
 use App\Entity\Hits;
 use App\Repository\HitsRepository;
+use Bolt\Controller\TwigAwareController;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Bolt\Controller\TwigAwareController;
 
 class NewsController extends TwigAwareController
 {
@@ -38,11 +38,13 @@ class NewsController extends TwigAwareController
         return $response;
     }
 
-    private function addHit(Request $request)
+    private function addHit(Request $request): void
     {
-        $options = unserialize(base64_decode($request->get('hash')));
+        $options = @unserialize(base64_decode($request->get('hash'), true));
 
-        $oldHit = $this->hitsRepository->findOneBy({ })
+        if (! $options || $this->hitsRepository->findOneForToday()) {
+            return;
+        }
 
         $options['remote'] = $request->getClientIp();
 
@@ -59,5 +61,4 @@ class NewsController extends TwigAwareController
         $this->entityManager->persist($hit);
         $this->entityManager->flush();
     }
-
 }

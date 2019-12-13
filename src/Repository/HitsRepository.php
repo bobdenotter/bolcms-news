@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Hits;
@@ -23,10 +25,10 @@ class HitsRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.createdAt LIKE :val')
-            ->setParameter('val', date('Y-m-d*'))
+            ->setParameter('val', date('Y-m-d%'))
+            ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     // /**

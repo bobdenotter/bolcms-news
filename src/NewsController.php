@@ -42,21 +42,25 @@ class NewsController extends TwigAwareController
     {
         $options = @unserialize(base64_decode($request->get('hash', ''), false));
 
-        if (! $options || $this->hitsRepository->findOneForToday()) {
+        if (! $options) {
             return;
         }
 
         $options['remote'] = $request->getClientIp();
 
+        if ($this->hitsRepository->findOneForToday($options)) {
+            return;
+        }
+
         $hit = new Hits();
         $hit
-            ->setVersion($options['v'])
-            ->setPhp($options['php'])
-            ->setLocal($options['host'])
-            ->setName($options['name'])
-            ->setEnv($options['env'])
-            ->setDbdriver($options['db_driver'])
-            ->setDbversion($options['db_version'])
+            ->setVersion($options['v'] ?? '')
+            ->setPhp($options['php'] ?? '')
+            ->setLocal($options['host'] ?? '')
+            ->setName($options['name'] ?? '')
+            ->setEnv($options['env'] ?? '')
+            ->setDbdriver($options['db_driver'] ?? '')
+            ->setDbversion($options['db_version'] ?? '')
             ->setRemote($options['remote']);
 
         $this->entityManager->persist($hit);

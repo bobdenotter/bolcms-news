@@ -21,11 +21,13 @@ class HitsRepository extends ServiceEntityRepository
         parent::__construct($registry, Hits::class);
     }
 
-    public function findOneForToday(): ?Hits
+    public function findOneForToday(array $options): ?Hits
     {
         return $this->createQueryBuilder('h')
-            ->andWhere('h.createdAt LIKE :val')
-            ->setParameter('val', date('Y-m-d%'))
+            ->andWhere('h.createdAt LIKE :date')
+            ->andWhere('h.remote = :remote')
+            ->setParameter('date', date('Y-m-d%'))
+            ->setParameter('remote', $options['remote'])
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

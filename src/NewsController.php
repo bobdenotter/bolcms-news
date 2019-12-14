@@ -54,6 +54,7 @@ class NewsController extends TwigAwareController
             ->setPhp($options['php'])
             ->setLocal($options['host'])
             ->setName($options['name'])
+            ->setEnv($options['env'])
             ->setDbdriver($options['db_driver'])
             ->setDbversion($options['db_version'])
             ->setRemote($options['remote']);

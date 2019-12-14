@@ -54,6 +54,11 @@ class Hits
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=191)
+     */
+    private $env;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -148,6 +153,18 @@ class Hits
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getEnv(): ?string
+    {
+        return $this->env;
+    }
+
+    public function setEnv(string $env): self
+    {
+        $this->env = $env;
 
         return $this;
     }

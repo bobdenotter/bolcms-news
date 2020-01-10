@@ -87,3 +87,11 @@ services:
 
     Bolt\Extension\RoutesLoader:
         tags: [routing.loader]
+
+    monolog.processor.request:
+        class: Bolt\Log\RequestProcessor
+        tags:
+            - { name: monolog.processor, method: processRecord, handler: db }
+
+    Bolt\Event\Subscriber\TimedPublishSubscriber:
+        arguments: [ "%bolt.table_prefix%" ]

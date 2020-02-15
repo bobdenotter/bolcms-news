@@ -1,7 +1,4 @@
 {
-    "antishov/doctrine-extensions-bundle": {
-        "version": "v1.4.0"
-    },
     "api-platform/core": {
         "version": "2.1",
         "recipe": {
@@ -15,9 +12,6 @@
             "config/routes/api_platform.yaml",
             "src/Entity/.gitignore"
         ]
-    },
-    "behat/transliterator": {
-        "version": "v1.2.0"
     },
     "bobdenotter/weatherwidget": {
         "version": "1.0.0"
@@ -163,9 +157,6 @@
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
-    "gedmo/doctrine-extensions": {
-        "version": "v2.4.36"
-    },
     "guzzlehttp/psr7": {
         "version": "1.5.2"
     },
@@ -180,6 +171,9 @@
     },
     "justinrainbow/json-schema": {
         "version": "5.2.8"
+    },
+    "knplabs/doctrine-behaviors": {
+        "version": "v2.0.1"
     },
     "knplabs/knp-menu": {
         "version": "2.3.0"
@@ -321,6 +315,9 @@
     },
     "ralouphie/getallheaders": {
         "version": "2.0.5"
+    },
+    "ramsey/uuid": {
+        "version": "3.9.2"
     },
     "scienta/doctrine-json-functions": {
         "version": "4.0.2"
@@ -533,11 +530,17 @@
     "symfony/polyfill-iconv": {
         "version": "v1.11.0"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.13.1"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.10.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.13.1"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
@@ -607,6 +610,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.2.2"
+    },
+    "symfony/string": {
+        "version": "v5.0.3"
     },
     "symfony/swiftmailer-bundle": {
         "version": "2.5",
@@ -723,9 +729,6 @@
     "symplify/coding-standard": {
         "version": "v7.1.0"
     },
-    "symplify/easy-coding-standard": {
-        "version": "v7.1.0"
-    },
     "symplify/package-builder": {
         "version": "v7.1.0"
     },
@@ -737,18 +740,6 @@
     },
     "tightenco/collect": {
         "version": "v5.8.2"
-    },
-    "twig/extensions": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
-        },
-        "files": [
-            "config/packages/twig_extensions.yaml"
-        ]
     },
     "twig/twig": {
         "version": "v2.6.2"

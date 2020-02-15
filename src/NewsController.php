@@ -7,8 +7,8 @@ namespace App;
 use App\Entity\Hits;
 use App\Repository\HitsRepository;
 use Bolt\Controller\TwigAwareController;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,7 +20,7 @@ class NewsController extends TwigAwareController
     /** @var HitsRepository */
     private $hitsRepository;
 
-    public function __construct(ObjectManager $entityManager, HitsRepository $hitsRepository)
+    public function __construct(EntityManagerInterface $entityManager, HitsRepository $hitsRepository)
     {
         $this->entityManager = $entityManager;
         $this->hitsRepository = $hitsRepository;

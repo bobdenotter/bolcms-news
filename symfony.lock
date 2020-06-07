@@ -31,6 +31,9 @@
     "bolt/themes": {
         "version": "3.0.0"
     },
+    "brick/math": {
+        "version": "0.8.15"
+    },
     "cocur/slugify": {
         "version": "v3.2"
     },
@@ -124,6 +127,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.0"
+    },
     "drupol/composer-packages": {
         "version": "1.0.0"
     },
@@ -162,9 +168,6 @@
     },
     "intervention/image": {
         "version": "2.4.2"
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "jean85/pretty-package-versions": {
         "version": "1.2"
@@ -214,23 +217,11 @@
     "nesbot/carbon": {
         "version": "1.36.2"
     },
-    "nette/application": {
-        "version": "v3.0.3"
-    },
-    "nette/component-model": {
-        "version": "v3.0.0"
-    },
     "nette/finder": {
         "version": "v2.5.1"
     },
-    "nette/http": {
-        "version": "v3.0.3"
-    },
     "nette/robot-loader": {
         "version": "v3.2.0"
-    },
-    "nette/routing": {
-        "version": "v3.0.0"
     },
     "nette/utils": {
         "version": "v3.0.2"
@@ -295,6 +286,9 @@
     "phpstan/phpdoc-parser": {
         "version": "0.4.1"
     },
+    "phpstan/phpstan": {
+        "version": "0.12.25"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -316,11 +310,17 @@
     "ralouphie/getallheaders": {
         "version": "2.0.5"
     },
+    "ramsey/collection": {
+        "version": "1.0.1"
+    },
     "ramsey/uuid": {
         "version": "3.9.2"
     },
     "scienta/doctrine-json-functions": {
         "version": "4.0.2"
+    },
+    "sebastian/diff": {
+        "version": "3.0.2"
     },
     "seld/jsonlint": {
         "version": "1.7.1"
@@ -560,6 +560,9 @@
     "symfony/polyfill-php73": {
         "version": "v1.11.0"
     },
+    "symfony/polyfill-php80": {
+        "version": "v1.17.0"
+    },
     "symfony/process": {
         "version": "v4.2.2"
     },
@@ -721,8 +724,17 @@
     "symplify/coding-standard": {
         "version": "v7.1.0"
     },
+    "symplify/console-color-diff": {
+        "version": "v7.3.18"
+    },
     "symplify/package-builder": {
         "version": "v7.1.0"
+    },
+    "symplify/parameter-name-guard": {
+        "version": "v7.3.18"
+    },
+    "symplify/phpstan-extensions": {
+        "version": "v7.3.18"
     },
     "symplify/set-config-resolver": {
         "version": "v7.1.0"

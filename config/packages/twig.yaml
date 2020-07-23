@@ -1,6 +1,6 @@
 twig:
     debug: '%kernel.debug%'
-    strict_variables: true
+    strict_variables: '%kernel.debug%'
     form_themes:
         - '@bolt/form/layout.html.twig'
         - '@bolt/form/fields.html.twig'
@@ -13,5 +13,6 @@ twig:
     globals:
         'config': '@Bolt\Configuration\Config'
 
-    # Override Symfony's error pages (so we can show custom 404's)
-    exception_controller: Bolt\Controller\ExceptionController::showAction
+    # Silence Twig / Symfony's exception controller here, so we can set it up properly in
+    # `framework.yaml` (so we can show custom 404's)
+    exception_controller: ~

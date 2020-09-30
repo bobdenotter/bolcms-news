@@ -1,0 +1,59 @@
+<canvas id="installs"></canvas>
+{% set installs = hits() %}
+
+<script>
+
+    const ctx = document.getElementById('installs').getContext('2d');
+    const installsChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for week, hits in installs %}
+                {{ ('"' ~ week|date('d/m') ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [{
+                label: '# of all hits',
+                data: [
+                    {% for week, hits in installs %}
+                    {{ hits|length ~ ',' }}
+                    {% endfor %}
+                ],
+                borderColor: window.chartColors[0],
+                backgroundColor: '',
+            },
+            {
+                label: '# in prod',
+                data: [
+                    {% for week, hits in installs %}
+                        {{ hits|filter(h => h.env == 'prod')|length ~ ',' }}
+                    {% endfor %}
+                ],
+                borderColor: window.chartColors[1],
+            },
+                {
+                    label: '# in dev',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.env == 'dev')|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                    borderColor: window.chartColors[2],
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'All installations'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

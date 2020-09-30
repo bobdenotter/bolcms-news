@@ -1,0 +1,51 @@
+<canvas id="phpversion"></canvas>
+{% set installs = hits(group_by='phpversion')|sort %}
+
+<script>
+
+    const phpversionCanvas = document.getElementById('phpversion').getContext('2d');
+    const phpversionChart = new Chart(phpversionCanvas, {
+        type: 'bar',
+        data: {
+            labels: [
+                {% for phpversion, hits in installs %}
+                {{ ('"' ~ phpversion ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [{
+                label: '# of all hits',
+                data: [
+                    {% for phpversion, hits in installs %}
+                    {{ hits|length ~ ',' }}
+                    {% endfor %}
+                ],
+                borderColor: window.chartColors[0],
+                backgroundColor: window.chartColors[0],
+            },
+                {
+                    label: '# in prod',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.env == 'prod')|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                    borderColor: window.chartColors[1],
+                    backgroundColor: window.chartColors[1],
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'By PHP version'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

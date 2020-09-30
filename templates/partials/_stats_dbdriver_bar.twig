@@ -1,0 +1,51 @@
+<canvas id="dbdriver"></canvas>
+{% set installs = hits(group_by='dbdriver') %}
+
+<script>
+
+    const dbdriverCanvas = document.getElementById('dbdriver').getContext('2d');
+    const dbdriverChart = new Chart(dbdriverCanvas, {
+        type: 'bar',
+        data: {
+            labels: [
+                {% for dbdriver, hits in installs %}
+                {{ ('"' ~ dbdriver ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [{
+                label: '# of all hits',
+                data: [
+                    {% for dbdriver, hits in installs %}
+                    {{ hits|length ~ ',' }}
+                    {% endfor %}
+                ],
+                borderColor: window.chartColors[0],
+                backgroundColor: window.chartColors[0],
+            },
+                {
+                    label: '# in prod',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.env == 'prod')|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                    borderColor: window.chartColors[1],
+                    backgroundColor: window.chartColors[1],
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'By database driver'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

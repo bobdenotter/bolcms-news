@@ -1,0 +1,45 @@
+<canvas id="phpversion_over_time_relative_hits"></canvas>
+{% set installs = hits(group_by='week') %}
+
+<script>
+
+    const phpversionOverTimeRelativeHitsCanvas = document.getElementById('phpversion_over_time_relative_hits').getContext('2d');
+    const phpversionOverTimeRelativeHitsChart = new Chart(phpversionOverTimeRelativeHitsCanvas, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for week, hits in installs %}
+                {{ ('"' ~ week|date('d/m') ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [
+                {% for phpversion in hits(group_by='phpversion')|keys %}
+                {
+                    label: 'PHP {{ phpversion }}',
+                    borderColor: window.chartColors[{{ loop.index - 1 }}],
+                    backgroundColor: '',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.php starts with phpversion)|length / hits|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                },
+                {% endfor %}
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'PHP Versions over time relative to # of hits'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

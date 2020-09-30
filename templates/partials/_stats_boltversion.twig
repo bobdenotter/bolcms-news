@@ -1,0 +1,51 @@
+<canvas id="boltversion"></canvas>
+{% set installs = hits(group_by='boltversion')|sort %}
+
+<script>
+
+    const boltversionCanvas = document.getElementById('boltversion').getContext('2d');
+    const boltversionChart = new Chart(boltversionCanvas, {
+        type: 'bar',
+        data: {
+            labels: [
+                {% for boltversion, hits in installs %}
+                {{ ('"' ~ boltversion ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [{
+                label: '# of all hits',
+                data: [
+                    {% for boltversion, hits in installs %}
+                    {{ hits|length ~ ',' }}
+                    {% endfor %}
+                ],
+                borderColor: window.chartColors[0],
+                backgroundColor: window.chartColors[0],
+            },
+                {
+                    label: '# in prod',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.env == 'prod')|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                    borderColor: window.chartColors[1],
+                    backgroundColor: window.chartColors[1],
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'By Bolt version'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

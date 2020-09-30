@@ -1,0 +1,42 @@
+<canvas id="installs_unique_prod"></canvas>
+{% set installs = hits(group_by=null)|unique_hits('getLocal')|filter(h => h.env == 'prod')|group_by_created_at('week') %}
+
+<script>
+
+    const installsUniqueProdCanvas = document.getElementById('installs_unique_prod').getContext('2d');
+    const installsUniqueProdChart = new Chart(installsUniqueProdCanvas, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for week, hits in installs %}
+                {{ ('"' ~ week|date('d/m') ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [
+                {
+                    label: '# unique domain hits in prod',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.env == 'prod')|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                    borderColor: window.chartColors[1],
+                },
+                ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Unique domain hits in prod'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

@@ -1,0 +1,45 @@
+<canvas id="dbdriver_over_time"></canvas>
+{% set installs = hits(group_by='week') %}
+
+<script>
+
+    const dbDriverOverTimeCanvas = document.getElementById('dbdriver_over_time').getContext('2d');
+    const dbDrtiverOverTimeChart = new Chart(dbDriverOverTimeCanvas, {
+        type: 'line',
+        data: {
+            labels: [
+                {% for week, hits in installs %}
+                {{ ('"' ~ week|date('d/m') ~ '",')|raw }}
+                {% endfor %}
+            ],
+
+            datasets: [
+                {% for dbdriver in hits(group_by='dbdriver')|keys %}
+                {
+                    label: '{{ dbdriver }}',
+                    borderColor: window.chartColors[{{ loop.index - 1 }}],
+                    backgroundColor: '',
+                    data: [
+                        {% for week, hits in installs %}
+                        {{ hits|filter(h => h.dbdriver == dbdriver)|length ~ ',' }}
+                        {% endfor %}
+                    ],
+                },
+                {% endfor %}
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Database driver over time'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

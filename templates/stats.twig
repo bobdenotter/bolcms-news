@@ -1,0 +1,81 @@
+{% extends '@bolt/_base/layout.html.twig' %}
+
+{% block title %}
+Bolt usage statistics
+{% endblock %}
+
+{% block main %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+        window.chartColors = [
+            '#0278FC',
+            '#FC8602',
+            '#69fda4',
+        ];
+    </script>
+
+    {% include '@app/partials/_stats_filter.twig' %}
+
+    <h2 class="mt-5">General</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                {% include '@app/partials/_stats_installs_line.twig' %}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                {% include '@app/partials/_stats_boltversion.twig' %}
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-4">
+            <div class="card">
+                {% include '@app/partials/_stats_installs_unique_prod.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">By PHP version</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                {% include '@app/partials/_stats_phpversion.twig' %}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                {% include '@app/partials/_stats_phpversion_over_time.twig' %}
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-4">
+            <div class="card">
+                {% include '@app/partials/_stats_phpversion_over_time_relative_hits.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">By Database driver</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                {% include'@app/partials/_stats_dbdriver_bar.twig' %}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                {% include'@app/partials/_stats_dbdriver_over_time.twig' %}
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-4">
+            <div class="card">
+                {% include '@app/partials/_stats_dbdriver_over_time_in_prod.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

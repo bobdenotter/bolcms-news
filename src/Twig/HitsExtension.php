@@ -70,6 +70,8 @@ class HitsExtension extends AbstractExtension
                 return $this->groupByPHPVersion($hits);
             case 'boltversion':
                 return $this->groupByBoltVersion($hits);
+            case 'local':
+                return $this->groupByLocal($hits);
         }
 
         return $hits;
@@ -133,6 +135,15 @@ class HitsExtension extends AbstractExtension
 
         return $items->groupBy(function(Hits $hit) {
             return $hit->getDbdriver();
+        })->toArray();
+    }
+
+    private function groupByLocal(array $items): array
+    {
+        $items = collect($items);
+
+        return $items->groupBy(function(Hits $hit) {
+            return $hit->getLocal();
         })->toArray();
     }
 

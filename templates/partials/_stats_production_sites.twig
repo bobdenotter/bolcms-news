@@ -1,0 +1,26 @@
+{# Hits grouped by local where at least 1 hit is in production #}
+{% set localHits = hits(group_by='local')|filter((v,k) => k != '127.0.0.1' and v|filter((hit) => hit.env in ['prod', 'production']) is not empty) %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Website</th>
+            <th scope="col">Earliest hit</th>
+            <th scope="col">Most recent hit</th>
+            <th scope="col">Total hits</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for local, hits in localHits %}
+        {% set prodHits = hits|filter(hit => hit.env in ['prod', 'production'])|sort((a,b) => a.createdAt <=> b.createdAt) %}
+        {% set hit = prodHits|last %}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <th scope="row">{{ hit.name }} <a href="https://{{ hit.local }}" target="_blank"><i class="fas fa-external-link-alt"></i></a></th>
+            <th scope="row">{{ prodHits|first.createdAt|localdate }}</th>
+            <th scope="row">{{ prodHits|last.createdAt|localdate }}</th>
+            <th scope="row">{{ prodHits|length }}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

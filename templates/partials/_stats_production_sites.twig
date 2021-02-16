@@ -1,6 +1,6 @@
 {# Hits grouped by local where at least 1 hit is in production #}
 {% set localHits = hits(group_by='local')|filter((v,k) => k != '127.0.0.1' and v|filter((hit) => hit.env in ['prod', 'production']) is not empty) %}
-<table class="table">
+<table class="table sortable">
     <thead>
         <tr>
             <th scope="col">#</th>

@@ -17,8 +17,8 @@
         <tr>
             <th scope="row">{{ loop.index }}</th>
             <th scope="row">{{ hit.name }} <a href="https://{{ hit.local }}" target="_blank"><i class="fas fa-external-link-alt"></i></a></th>
-            <th scope="row">{{ prodHits|first.createdAt|localdate }}</th>
-            <th scope="row">{{ prodHits|last.createdAt|localdate }}</th>
+            <th scope="row" sorttable_customkey="{{ prodHits|first.createdAt.format('Ymd') }}">{{ prodHits|first.createdAt|localdate }}</th>
+            <th scope="row" sorttable_customkey="{{ prodHits|last.createdAt.format('Ymd') }}">{{ prodHits|last.createdAt|localdate }}</th>
             <th scope="row">{{ prodHits|length }}</th>
         </tr>
     {% endfor %}
